@@ -79,20 +79,14 @@ private async savePicture(photo: Photo) {
   if (!this.platform.is('hybrid')) {
     // Display the photo by reading into base64 format
     for (let photo of this.photos) {
-      // Only try to read from Filesystem if the photo was actually saved there
-      if (photo.filepath && !photo.webviewPath) {
-        try {
-          const readFile = await Filesystem.readFile({
-            path: photo.filepath,
-            directory: Directory.Data
-          });
-          photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
-        } catch (e) {
-          console.warn('File does not exist:', photo.filepath);
-        }
-      }
-      // If webviewPath exists (web photo), use it directly
-      // No need to read from Filesystem
+      // Read each saved photo's data from the Filesystem
+      const readFile = await Filesystem.readFile({
+          path: photo.filepath,
+          directory: Directory.Data
+      });
+
+      // Web platform only: Load the photo as base64 data
+      photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
     }
   }
 }
