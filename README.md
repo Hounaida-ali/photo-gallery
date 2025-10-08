@@ -14,7 +14,7 @@ cette application est développée avec Ionic + Angular et utilise Capacitor pou
 ## Installation du projet
   1.Cloner le projet :
   ```
-  git clone <URL_DU_REPO>
+  git@github.com:Hounaida-ali/photo-gallery.git
   cd photo-gallery
 ```
 
